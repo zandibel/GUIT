@@ -3,42 +3,65 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package com.jc.elementos.model;
+
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  *
- * @author campitos
+ * @author T
  */
-public class Trabajador {
-    private int id;
+@Entity
+@Table(name = "trabajador")
+public class Trabajador implements Serializable {
+    private static final long serialVersionUID = 1L;
+    
+    // Primer atributo
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID_TRABAJADOR")
+    private Integer idTrabajador;
+    
+    
+    @Column(name = "NOMBRE")
     private String nombre;
-    private int horasLaboradas;
-    private float sueldoBase;
+    
+    @Column(name = "PATERNO")
+    private String paterno;
+    
+    @Column(name = "MATERNO")
+    private String materno;
 
     public Trabajador() {
     }
 
-    public Trabajador(int id, String nombre, int horasLaboradas, float sueldoBase) {
-        this.id = id;
+    public Trabajador(String nombre, String paterno, String materno) {
         this.nombre = nombre;
-        this.horasLaboradas = horasLaboradas;
-        this.sueldoBase = sueldoBase;
+        this.paterno = paterno;
+        this.materno = materno;
     }
 
-    public float getSueldoBase() {
-        return sueldoBase;
+    public Trabajador(Integer idTrabajador) {
+        this.idTrabajador = idTrabajador;
     }
 
-    public void setSueldoBase(float sueldoBase) {
-        this.sueldoBase = sueldoBase;
+    public Integer getIdTrabajador() {
+        return idTrabajador;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setIdTrabajador(Integer idTrabajador) {
+        this.idTrabajador = idTrabajador;
     }
 
     public String getNombre() {
@@ -49,14 +72,45 @@ public class Trabajador {
         this.nombre = nombre;
     }
 
-    public int getHorasLaboradas() {
-        return horasLaboradas;
+    public String getPaterno() {
+        return paterno;
     }
 
-    public void setHorasLaboradas(int horasLaboradas) {
-        this.horasLaboradas = horasLaboradas;
+    public void setPaterno(String paterno) {
+        this.paterno = paterno;
     }
-    
-    
+
+    public String getMaterno() {
+        return materno;
+    }
+
+    public void setMaterno(String materno) {
+        this.materno = materno;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (idTrabajador != null ? idTrabajador.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Trabajador)) {
+            return false;
+        }
+        Trabajador other = (Trabajador) object;
+        if ((this.idTrabajador == null && other.idTrabajador != null) || (this.idTrabajador != null && !this.idTrabajador.equals(other.idTrabajador))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "com.jc.elementos.model.Trabajador[ idTrabajador=" + idTrabajador + " ]";
+    }
     
 }
